@@ -3,10 +3,10 @@ package com.example.sd21303jav203.buoi3.controller;
 import com.example.sd21303jav203.buoi3.entity.Login;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/buoi3")
@@ -29,7 +29,6 @@ public class LoginController {
 //        model.addAttribute("rm", remember);
 //        return "/buoi3/thong-tin";
 //    }
-
     @PostMapping("/dang-nhap")
     public String dangNhap(Login login, Model model) {
         model.addAttribute("usr", login.getUsername());
@@ -38,4 +37,25 @@ public class LoginController {
         return "/buoi3/thong-tin";
     }
 
+    // demo forward
+    @GetMapping("/login-forward")
+    public String demoForward() {
+        return "forward:/hello-world";
+    }
+
+    // demo redirect
+    @GetMapping("/login-redirect")
+    public String demoRedirect() {
+        return "redirect:/hello-world";
+    }
+
+    @ResponseBody
+    @GetMapping("/test-api")
+    public List<Login> testAPI() {
+        List<Login> danhSach = new ArrayList<>();
+        danhSach.add(new Login("123", "234", true));
+        danhSach.add(new Login("1234", "234", true));
+        danhSach.add(new Login("456", "234", false));
+        return danhSach;
+    }
 }

@@ -1,7 +1,10 @@
 package com.example.sd21201sof3062.buoi4.controller;
 
 import com.example.sd21201sof3062.buoi4.entity.Phong;
+import com.example.sd21201sof3062.buoi4.request.PhongRequest;
+import com.example.sd21201sof3062.buoi4.response.PhongResponse;
 import com.example.sd21201sof3062.buoi4.service.PhongService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -14,25 +17,31 @@ public class PhongController {
     @Autowired
     PhongService phongService;
     @GetMapping("/hien-thi")
-    public List<Phong> hienThi() {
+
+    public List<PhongResponse> hienThi() {
         return phongService.hienThi();
     }
     @GetMapping("/{id}")
+
     public Phong getDetailById(@PathVariable("id") Integer id) {
         return phongService.getById(id);
     }
+
     @PostMapping("/them")
-    public void themPhong(@RequestBody Phong phong) {
-        phongService.themPhong(phong);
+    public void themPhong(@RequestBody @Valid PhongRequest phongRequest) {
+        phongService.themPhong(phongRequest);
     }
+
     @PatchMapping("/sua")
-    public void suaPhong(@RequestBody Phong phong) {
-        phongService.suaPhong(phong);
+    public void suaPhong(@RequestBody @Valid PhongRequest phongRequest) {
+        phongService.suaPhong(phongRequest);
     }
+
     @DeleteMapping("/xoa")
     public void xoaPhong(@RequestParam("id") Integer id) {
         phongService.xoaPhong(id);
     }
+
     @GetMapping("/phan-trang")
     public Page phanTrang(
             @RequestParam(
@@ -42,6 +51,7 @@ public class PhongController {
             ) {
         return phongService.phanTrang(pageNumber);
     }
+
     @GetMapping("/searchTen")
     public List<Phong> searchByTen(@RequestParam("ten") String ten) {
         return phongService.searchByTen(ten);

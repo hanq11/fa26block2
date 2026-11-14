@@ -25,6 +25,7 @@
                 <th>ten</th>
                 <th>gioiTinh</th>
                 <th>diem</th>
+                <th>hanh dong</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,10 @@
                     <td th:text="${sv.ten}"></td>
                     <td th:text="${sv.gioiTinh}"></td>
                     <td th:text="${sv.diem}"></td>
+                    <td>
+                        <a th:href="@{|/buoi4/view-update/${sv.id}|}">View update</a>
+                        <a th:href="@{|/buoi4/xoa?id=${sv.id}|}">Xoa</a>
+                    </td>
                 </tr>
             </th:block>
         </tbody>
